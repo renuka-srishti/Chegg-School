@@ -1,11 +1,11 @@
 package com.chegg.school.controller;
 
 
+import com.chegg.school.dto.SchoolDTO;
 import com.chegg.school.model.Course;
 import com.chegg.school.model.Professor;
 import com.chegg.school.model.School;
 import com.chegg.school.model.Student;
-import com.chegg.school.repository.SchoolRepository;
 import com.chegg.school.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,38 +22,43 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api)")
+@RequestMapping("/api")
 public class SchoolController {
     private final SchoolService schoolService;
-    private final SchoolRepository schoolRepository;
 
     @PostMapping("/addSchool")
-    public ResponseEntity addSchool(@RequestBody School school) {
-        schoolService.addSchool(school.getName());
+    public ResponseEntity addSchool(@RequestBody SchoolDTO schoolDTO) {
+        schoolService.addSchool(schoolDTO.getName());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping("/addCoursesToSchool")
-    public ResponseEntity addCoursesToSchool(@RequestParam long schoolId, @RequestParam List<Long> courseIds) {
-        schoolService.addCoursesToSchool(schoolId, courseIds);
+    public ResponseEntity addCoursesToSchool(@RequestBody SchoolDTO schoolDTO) {
+        schoolService.addCoursesToSchool(schoolDTO.getId(), schoolDTO.getCourseIds());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping("/addStudentsToSchool")
-    public ResponseEntity addStudentsToSchool(@RequestParam long schoolId, @RequestParam List<Long> studentIds) {
-        schoolService.addStudentsToSchool(schoolId, studentIds);
+    public ResponseEntity addStudentsToSchool(@RequestBody SchoolDTO schoolDTO) {
+        schoolService.addStudentsToSchool(schoolDTO.getId(), schoolDTO.getStudentIds());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping("/addProfessorsToSchool")
-    public ResponseEntity addProfessorsToSchool(@RequestParam long schoolId, @RequestParam List<Long> professorIds) {
-        schoolService.addProfessorsToSchool(schoolId, professorIds);
+    public ResponseEntity addProfessorsToSchool(@RequestBody SchoolDTO schoolDTO) {
+        schoolService.addProfessorsToSchool(schoolDTO.getId(), schoolDTO.getProfessorIds());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping("/assignCourseToProfessorInSchool")
-    public ResponseEntity assignCourseToProfessor(@RequestParam long schoolId, @RequestParam long courseId, @RequestBody long professorId) {
+    public ResponseEntity assignCourseToProfessor(@RequestParam long schoolId, @RequestParam long courseId, @RequestParam long professorId) {
         schoolService.assignCourseToProfessorInSchool(schoolId, courseId, professorId);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PostMapping("/assignCourseToStudentInSchool")
+    public ResponseEntity assignCourseToStudent(@RequestParam long courseId, @RequestParam long studentId) {
+        schoolService.assignCourseToStudentInSchool(courseId, studentId);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

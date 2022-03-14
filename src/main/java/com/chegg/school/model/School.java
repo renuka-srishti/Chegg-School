@@ -38,6 +38,9 @@ public class School extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "school")
     Set<Student> students = new HashSet<>();
 
+    public School() {
+    }
+
     public School(String name) {
         this.name = name;
     }

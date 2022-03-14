@@ -55,8 +55,8 @@ public class SchoolService {
 
         School school = schoolRepository.getById(schoolId);
 
-        for (Long id: studentIds) {
-            if(studentRepository.existsById(id)) {
+        for (Long id : studentIds) {
+            if (studentRepository.existsById(id)) {
                 Student student = studentRepository.getById(id);
                 school.addStudent(student);
                 studentRepository.save(student);
@@ -72,7 +72,7 @@ public class SchoolService {
 
         School school = schoolRepository.getById(schoolId);
 
-        for (Long id: courseIds) {
+        for (Long id : courseIds) {
             if (courseRepository.existsById(id)) {
                 Course course = courseRepository.getById(id);
                 school.addCourse(course);
@@ -89,7 +89,7 @@ public class SchoolService {
 
         School school = schoolRepository.getById(schoolId);
 
-        for(Long id: professorIds) {
+        for (Long id : professorIds) {
             if (professorRepository.existsById(id)) {
                 Professor professor = professorRepository.getById(id);
                 school.addProfessor(professor);
@@ -116,15 +116,37 @@ public class SchoolService {
         Course course = courseRepository.getById(courseId);
         Professor professor = professorRepository.getById(professorId);
 
-        if(!school.getCourses().contains(course)) {
+        if (!school.getCourses().contains(course)) {
             throw new CourseNotInSchoolException(courseId, schoolId);
         }
 
-        if(!school.getProfessors().contains(professor)) {
+        if (!school.getProfessors().contains(professor)) {
             throw new ProfessorNotInSchoolException(professorId, schoolId);
         }
 
         professorCourseSchoolRepository.save(new ProfessorCourseSchool(school, course, professor));
+    }
+
+    public void assignCourseToStudentInSchool(Long courseId, Long studentId) {
+        if (!courseRepository.existsById(courseId)) {
+            throw new CourseNotExistException(courseId);
+        }
+
+        if (!studentRepository.existsById(studentId)) {
+            throw new StudentNotExistException(studentId);
+        }
+
+        Student student = studentRepository.getById(studentId);
+        Course course = courseRepository.getById(courseId);
+        School school = student.getSchool();
+
+        if (!school.getCourses().contains(course)) {
+            throw new CourseNotInSchoolException(courseId, school.getId());
+        }
+
+        student.addNewCourse(course);
+        courseRepository.save(course);
+        studentRepository.save(student);
     }
 
     public void removeStudentFromSchool(Long schoolId, Long studentId) {

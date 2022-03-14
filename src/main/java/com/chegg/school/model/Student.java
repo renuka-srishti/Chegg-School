@@ -44,4 +44,9 @@ public class Student extends User {
     public void removeAllCourses() {
         courses = new HashSet<>();
     }
+
+    public void addNewCourse(Course course) {
+        courses.add(course);
+        course.getStudents().add(this);
+    }
 }
