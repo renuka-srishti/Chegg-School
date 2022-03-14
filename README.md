@@ -48,99 +48,96 @@ This project uses JPA to define following relationship between models as follows
 
 **Project URL:** [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
-## How to?
-- Create Dummy data by opening [http://127.0.0.1:8080/dummyData](http://127.0.0.1:8080/dummyData).
-
 ## List of APIs supported by back-end
-- Add a student
-    - API: 
-    - Method: POST
-    - Request JSON Body:     
-  ```json
-  {
-    "name": "Renuka",
-    "email": "renuka@gmail.com",
-    "schoolName": "Test School",
-    "isProfessor": FALSE
-  }
-    ```
-  
-- Add a professor
-  - API: 
-  - Method: POST
-  - Request JSON Body:
-  ```json
-  {
-    "name": "Srishti",
-    "email": "srishti@gmail.com",
-    "schoolName": "Test School"
-    "courseTaught": ["SubA", "SubB", "SubC", "SubD"],
-    "isProfessor": TRUE
-  }
-    ```
-  
-- Update user: Student
-  - API: 
-  - Method: POST
-  - Request JSON Body:
-  ```json
-  
-    ```
-  
-- Update a user: Professor
-  - API: 
-  - Method: 
-  
-- List the users: Students
-  - API: 
-  - Method: 
-
-- List the users: Professors
-  - API: 
-  - Method: 
-
-- Delete a user: Professor
-  - API: 
-  - Method: 
-
-- Delete a user: Student
-  - API: 
-  - Method: 
-
-- Find all the students in the given school
-  - API: 
-  - Method: 
-  - Request JSON Body:
-  ```json
-  
-    ```
-  
-- Find Students
-  - API: 
-  - Method: 
-  - Request JSON Body:
-  ```json
-  
-    ```
-
-- Find Professors
-  - API: 
-  - Method: 
-  - Request JSON Body:
-  ```json
-  
-    ```
-
-- Find all the courses taught by a Professor
-  - API: 
-  - Method: 
-
-- Find all the courses taken by a student
-  - API: 
-  - Method: 
-
-- Create Dummy Data for testing.
-  - API: 
+- List all students in a school
+  - API: /api/listAllStudentsInSchool/{schoolId}
   - Method: GET
 
-**Note:** A postman collection is available with all the APIs.
+- Update user
+  - API: /api/updateUser
+  - Method: POST
+
+- List all courses
+  - API: /api/listAllCourses
+  - Method: GET
+
+- Add a course
+  - API: /api/addCourse
+  - Method: POST
+
+- List all courses in a school
+  - API: /api/listAllCoursesInSchool/{schoolId}
+  - Method: GET
+
+- Remove student from school
+  - API: /api/removeStudentFromSchool
+  - Method: POST
+
+- Add a user
+  - API: /api/addUser
+  - Method: POST
+
+- Delete a user
+  - API: /api/deleteUser
+  - Method: GET
+
+- List all users
+  - API: /api/listAllUsers
+  - Method: GET
+
+- Add a school
+  - API: /api/addSchool
+  - Method: POST
+
+- List all professors
+  - API: /api/listAllProfessors
+  - Method: GET
+
+- List all students
+  - API: /api/listAllStudents
+  - Method: GET
+
+- Add students to a school
+  - API: /api/addStudentsToSchool
+  - Method: POST
+
+- Add professors to a school
+  - API: /api/addProfessorsToSchool
+  - Method: POST
+
+- Add courses to a school
+  - API: /api/addCoursesToSchool
+  - Method: POST
+
+- Delete a course
+  - API: /api/deleteCourse
+  - Method: POST
+
+- List all professors in a school
+  - API: /api/listAllProfessorsInSchool/{schoolId}
+  - Method: GET
+
+- List all courses
+  - API: /api/listAllCourses
+  - Method: GET
+
+- Assign course to professor in a school
+  - API: /api/assignCourseToProfessorInSchool
+  - Method: POST
+
+- Delete a school
+  - API: /api/deleteSchool
+  - Method: POST
+
+- List all schools
+  - API: /api/listAllSchools
+  - Method: GET
+
+- Update a course
+  - API: /api/updateCourse
+  - Method: POST
+
+### Data
+Dummy data is attached.
+
+
