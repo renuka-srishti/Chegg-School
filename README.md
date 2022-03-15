@@ -138,6 +138,6 @@ This project uses JPA to define following relationship between models as follows
   - Method: POST
 
 ### Data
-Dummy data is attached.
+Dummy data is available in cheggschooldb file.
 
 
